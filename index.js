@@ -6,10 +6,11 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 const args = process.argv;
-const folderName = args[args.length - 1];
-const folder = folderName;
+const folder = args[args.length - 1];
 
-fs.mkdirSync(folder);
+if(folder !== '.') {
+  fs.mkdirSync(folder);
+}
 
 setupFiles(folder);
 installDependencies(folder);
