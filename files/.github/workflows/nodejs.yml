@@ -11,14 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     container: node:latest
     services:
-      mongodb:
+      mongo:
         image: mongo
-        ports:
-          - 27017:27017
     steps:
     - uses: actions/checkout@v2
     - run: npm ci
     - run: npm test
       env:
         CI: true
-        MONGODB_URI: mongodb://localhost:27017/testing-ci
+        MONGODB_URI: mongodb://mongo:27017/testing-ci
