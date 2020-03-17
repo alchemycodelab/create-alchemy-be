@@ -1,0 +1,24 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ master, dev ]
+  pull_request:
+    branches: [ master, dev ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: node:latest
+    services:
+      mongodb:
+        image: mongo
+        ports:
+          - 27017:27017
+    steps:
+    - uses: actions/checkout@v2
+    - run: npm ci
+    - run: npm test
+      env:
+        CI: true
+        MONGODB_URI: mongodb://localhost:27017/testing-ci
